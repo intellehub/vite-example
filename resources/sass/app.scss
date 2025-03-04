@@ -1,0 +1,978 @@
+@import '../js/assets/css/style.css';
+@import 'element-plus/dist/index.css';
+@import '@vueup/vue-quill/dist/vue-quill.snow.css';
+@import '@vueup/vue-quill/dist/vue-quill.bubble.css';
+@import 'primeicons/primeicons.css';
+@import "quill2-emoji/dist/style.css";
+
+:root {
+    --animation-duration: 0.5s;
+}
+
+.transition-active {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    min-height: 100vh;
+    transition: transform var(--animation-duration) ease-in-out, opacity var(--animation-duration) ease-in-out;
+}
+
+.high-priority-transition {
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.slide-fade-enter-active {
+    transition: all 0.5s ease-out;
+}
+
+.slide-fade-leave-active {
+    transition: all 1s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+    transform: translateX(20px);
+    opacity: 0;
+}
+
+.el-container {
+    display: block !important;
+    width: auto;
+}
+
+// Global Element Plus sizing and styling
+.el-input__wrapper {
+  padding: 1px 15px !important;
+  height: 48px !important;
+  border-radius: 0.5rem !important;
+  background-color: transparent !important;
+  box-shadow: 0 0 0 1px #E2E8F0 inset !important;
+  outline: none !important;
+
+  &:hover {
+    box-shadow: 0 0 0 1px #E2E8F0 inset !important;
+  }
+
+  &.is-focus {
+    box-shadow: 0 0 0 1px #3C50E0 inset !important;
+    outline: none !important;
+    
+    .el-input__inner {
+      outline: none !important;
+      box-shadow: none !important;
+    }
+  }
+
+  .el-input__inner {
+    color: #1C2434 !important;
+    outline: none !important;
+    box-shadow: none !important;
+    
+    &:focus {
+      outline: none !important;
+      box-shadow: none !important;
+    }
+
+    &::placeholder {
+      color: #64748B !important;
+    }
+  }
+}
+
+.el-select__wrapper {
+  padding: 1px 15px !important;
+  height: 48px !important;
+  background-color: transparent !important;
+  box-shadow: 0 0 0 1px #E2E8F0 inset !important;
+  outline: none !important;
+
+  &:hover {
+    box-shadow: 0 0 0 1px #E2E8F0 inset !important;
+  }
+
+  &.is-focus {
+    box-shadow: 0 0 0 1px #3C50E0 inset !important;
+    outline: none !important;
+  }
+}
+
+.el-select-dropdown__item {
+  padding: 12px 20px !important;
+  height: 44px !important;
+  line-height: 20px !important;
+}
+
+.el-select-dropdown__empty {
+  padding: 12px 20px !important;
+}
+
+.dark {
+  .el-input__wrapper {
+    background-color: #1d2a39 !important;
+    box-shadow: 0 0 0 1px #3d4d60 inset !important;
+
+    &:hover {
+      box-shadow: 0 0 0 1px #2E3A47 inset !important;
+    }
+
+    &.is-focus {
+      box-shadow: 0 0 0 1px #3C50E0 inset !important;
+    }
+
+    .el-input__inner {
+      color: #FFFFFF !important;
+
+      &::placeholder {
+        color: #AEB7C0 !important;
+      }
+    }
+  }
+
+  .el-select__wrapper {
+    padding: 1px 15px !important;
+    height: 48px !important;
+    background-color: #1d2a39 !important;
+    box-shadow: 0 0 0 1px #3d4d60 inset !important;
+    color: #AEB7C0 !important;
+
+    &:hover {
+      box-shadow: 0 0 0 1px #2E3A47 inset !important;
+    }
+
+    &.is-focus {
+      box-shadow: 0 0 0 1px #3C50E0 inset !important;
+    }
+  }
+
+  .el-select-dropdown {
+    background-color: #1A222C !important;
+    border-color: #2E3A47 !important;
+    box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.3) !important;
+
+    .el-select-dropdown__item {
+      color: #AEB7C0 !important;
+      padding: 12px 20px !important;
+      height: 44px !important;
+      line-height: 20px !important;
+
+      &.hover, &:hover {
+        background-color: #24303F !important;
+      }
+
+      &.selected {
+        color: #3C50E0 !important;
+        background-color: #24303F !important;
+      }
+    }
+
+    .el-scrollbar__view {
+      background-color: #1A222C !important;
+    }
+
+    .el-select-dropdown__list {
+      background-color: #1A222C !important;
+    }
+
+    .el-select-dropdown__empty {
+      color: #8A99AF !important;
+      padding: 12px 20px !important;
+    }
+
+    .el-popper__arrow {
+      background-color: #1A222C !important;
+      border-color: #2E3A47 !important;
+    }
+
+    .el-select-dropdown__item {
+      &.is-hovering,
+      &:hover {
+        background-color: #1E293B !important;
+      }
+
+      &.selected {
+        background-color: transparent !important;
+        color: #3C50E0 !important;
+      }
+
+      &.selected.is-hovering,
+      &.selected:hover {
+        background-color: #1E293B !important;
+      }
+    }
+  }
+
+  .el-popper.is-light {
+    background-color: #1A222C !important;
+    border-color: #2E3A47 !important;
+  }
+
+  .el-select {
+    .el-input {
+      .el-input__wrapper {
+        background-color: #1d2a39 !important;
+        box-shadow: 0 0 0 1px #3d4d60 inset !important;
+
+        &.is-focus {
+          box-shadow: 0 0 0 1px #3C50E0 inset !important;
+        }
+      }
+
+      .el-input__inner {
+        color: #AEB7C0 !important;
+        background-color: transparent !important;
+
+        &::placeholder {
+          color: #8A99AF !important;
+        }
+      }
+    }
+  }
+
+  .el-picker-panel {
+    background-color: #1A222C !important;
+    border-color: #2E3A47 !important;
+
+    .el-date-picker__header {
+      color: #AEB7C0 !important;
+    }
+
+    .el-date-table th {
+      color: #8A99AF !important;
+    }
+
+    .el-date-table td {
+      .cell {
+        color: #AEB7C0 !important;
+      }
+
+      &.available:hover {
+        background-color: #24303F !important;
+      }
+
+      &.current:not(.disabled) .cell {
+        background-color: #3C50E0 !important;
+        color: white !important;
+      }
+    }
+  }
+
+  .el-form-item__label {
+    color: #AEB7C0 !important;
+  }
+
+  .el-radio {
+    .el-radio__label {
+      color: #AEB7C0 !important;
+    }
+
+    .el-radio__inner {
+      background-color: #1d2a39 !important;
+      border-color: #3d4d60 !important;
+    }
+
+    &.is-checked .el-radio__inner {
+      background-color: #3C50E0 !important;
+      border-color: #3C50E0 !important;
+    }
+  }
+
+  .el-checkbox {
+    .el-checkbox__label {
+      color: #AEB7C0 !important;
+    }
+
+    .el-checkbox__inner {
+      background-color: #1d2a39 !important;
+      border-color: #3d4d60 !important;
+    }
+
+    &.is-checked .el-checkbox__inner {
+      background-color: #3C50E0 !important;
+      border-color: #3C50E0 !important;
+    }
+  }
+
+  .el-steps {
+    .el-step__title {
+      color: #8A99AF !important;
+
+      &.is-process {
+        color: #3C50E0 !important;
+      }
+      &.is-finish {
+        color: #219653 !important;
+      }
+    }
+
+    .el-step__description {
+      color: #8A99AF !important;
+
+      &.is-process {
+        color: #AEB7C0 !important;
+      }
+      &.is-finish {
+        color: #219653 !important;
+      }
+    }
+  }
+
+  .el-loading-mask {
+    background-color: rgb(15, 23, 42, 0.25) !important; // bg-slate-900/25 equivalent
+  }
+
+  // Fix for selected row in tables
+  .bg-white {
+    &.dark\:bg-white\/0\.3 {
+      background-color: rgba(255, 255, 255, 0.03) !important;
+    }
+  }
+}
+
+// Form item label alignment fixes (default/left position)
+.el-form-item {
+  margin-bottom: 20px !important;
+
+  .el-form-item__label {
+    height: 48px !important;
+    line-height: 48px !important;
+    padding: 0 12px 0 0 !important;
+    font-size: 0.875rem !important;
+    font-weight: 500 !important;
+    color: #1C2434 !important;
+  }
+
+  .el-form-item__content {
+    line-height: 48px !important;
+    min-height: 48px !important;
+    margin-left: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+}
+
+// Form item label alignment fixes for top position
+.el-form--label-top {
+  .el-form-item {
+    margin-bottom: 24px !important;
+
+    .el-form-item__label {
+      height: auto !important;
+      line-height: 1.5 !important;
+      padding: 0 0 8px 0 !important;
+      font-size: 0.875rem !important;
+      font-weight: 500 !important;
+      color: #1C2434 !important;
+      margin-bottom: 4px !important;
+    }
+
+    .el-form-item__content {
+      line-height: normal !important;
+      min-height: 48px !important;
+      margin-left: 0 !important;
+    }
+  }
+}
+
+// Date picker specific fixes
+.el-date-editor.el-input {
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+
+  .el-input__wrapper {
+    height: 48px !important;
+    padding: 1px 15px !important;
+    margin: 0 !important;
+  }
+}
+
+.el-date-editor {
+  --el-date-editor-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+// Dark mode adjustments
+.dark {
+  .el-form-item__label {
+    color: #FFFFFF !important;
+  }
+
+  .el-form--label-top {
+    .el-form-item__label {
+      color: #FFFFFF !important;
+    }
+  }
+
+  .el-select-dropdown {
+    .el-select-dropdown__item {
+      &.is-hovering,
+      &:hover {
+        background-color: #1E293B !important;
+      }
+
+      &.selected {
+        background-color: transparent !important;
+        color: #3C50E0 !important;
+      }
+
+      &.selected.is-hovering,
+      &.selected:hover {
+        background-color: #1E293B !important;
+      }
+    }
+  }
+}
+
+.search-button {
+    margin-bottom: 0.04rem;
+    padding: 1.4rem;
+}
+
+.quick-search-panel {
+    .bg-primary {
+        background-color: rgb(60, 80, 224, 0.1);
+    }
+}
+
+// Table styling
+table {
+  .min-w-full {
+    min-width: 100%;
+  }
+
+  thead {
+    tr {
+      border-bottom: 1px solid #E2E8F0;
+    }
+
+    th {
+      padding: 1.25rem;
+      text-align: left;
+
+      @media (min-width: 640px) {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      border-top: 1px solid #F1F5F9;
+
+      &:hover {
+        background-color: #F8FAFC;
+      }
+    }
+
+    td {
+      padding: 1rem 1.25rem;
+
+      @media (min-width: 640px) {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+    }
+  }
+}
+
+// Dark mode table styling
+.dark {
+  table {
+    thead {
+      tr {
+        border-bottom-color: #334155;
+      }
+
+      th {
+        color: #94A3B8;
+      }
+    }
+
+    tbody {
+      tr {
+        border-top-color: #1E293B;
+
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.02);
+        }
+      }
+
+      td {
+        color: #E2E8F0;
+      }
+    }
+  }
+
+  // Status badge colors in dark mode
+  .bg-success-50 {
+    background-color: rgba(34, 197, 94, 0.15);
+  }
+
+  .bg-warning-50 {
+    background-color: rgba(234, 179, 8, 0.15);
+  }
+
+  .bg-error-50 {
+    background-color: rgba(239, 68, 68, 0.15);
+  }
+
+  .text-success-700 {
+    color: #22C55E;
+  }
+
+  .text-warning-700 {
+    color: #EAB308;
+  }
+
+  .text-error-700 {
+    color: #EF4444;
+  }
+}
+
+// Table container styling
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.rounded-xl {
+  border-radius: 0.75rem;
+}
+
+.border {
+  border-width: 1px;
+}
+
+.border-gray-200 {
+  border-color: #E2E8F0;
+}
+
+.bg-white {
+  background-color: #FFFFFF;
+}
+
+// Dark mode container styling
+.dark {
+  .border-gray-800 {
+    border-color: #1E293B;
+  }
+
+  .bg-white\/\[0\.03\] {
+    background-color: rgba(255, 255, 255, 0.03);
+  }
+}
+
+// Custom scrollbar styling
+.custom-scrollbar {
+  &::-webkit-scrollbar {
+    height: 6px;
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #F1F5F9;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #CBD5E1;
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #94A3B8;
+  }
+}
+
+.dark .custom-scrollbar {
+  &::-webkit-scrollbar-track {
+    background: #1E293B;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #334155;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #475569;
+  }
+}
+
+// Dark mode input and form styling
+.dark {
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  input[type="number"],
+  input[type="tel"],
+  input[type="url"] {
+    &.border-stroke {
+      border-color: #3d4d60 !important;
+      background-color: #1d2a39 !important;
+      color: #fff !important;
+
+      &:focus {
+        border-color: #3C50E0 !important;
+      }
+
+      &::placeholder {
+        color: #8A99AF !important;
+      }
+    }
+  }
+
+  // Role permissions specific styles
+  .bg-meta-4 {
+    background-color: #1E293B !important;
+  }
+
+  .text-black {
+    color: #fff !important;
+  }
+
+  .border-stroke {
+    border-color: #3d4d60 !important;
+  }
+
+  .border-\[#eee\] {
+    border-color: #2E3A47 !important;
+  }
+
+  // Checkbox group styling in dark mode
+  .el-checkbox {
+    .el-checkbox__label {
+      color: #E2E8F0 !important;
+    }
+
+    .el-checkbox__input {
+      .el-checkbox__inner {
+        background-color: #1d2a39 !important;
+        border-color: #3d4d60 !important;
+      }
+
+      &.is-checked {
+        .el-checkbox__inner {
+          background-color: #3C50E0 !important;
+          border-color: #3C50E0 !important;
+        }
+      }
+    }
+  }
+
+  // Text colors for different states
+  .text-gray-500 {
+    color: #94A3B8 !important;
+  }
+
+  .text-gray-400 {
+    color: #AEB7C0 !important;
+  }
+
+  // Hover states
+  .hover\:bg-gray-100:hover {
+    background-color: #1E293B !important;
+  }
+}
+
+
+.dark {
+  .el-popover {
+    background-color: #1A222C !important;
+    border-color: #2E3A47 !important;
+
+    .el-checkbox {
+      margin-right: 0 !important;
+      width: 100% !important;
+      
+      .el-checkbox__input.is-disabled {
+        .el-checkbox__inner {
+          background-color: #1d2a39 !important;
+          border-color: #3d4d60 !important;
+        }
+
+        &.is-checked .el-checkbox__inner {
+          background-color: #3C50E0 !important;
+          border-color: #3C50E0 !important;
+        }
+      }
+    }
+  }
+}
+
+// Popover scrollbar styling
+.el-popover {
+  .max-h-60 {
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: #F1F5F9;
+      border-radius: 3px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #CBD5E1;
+      border-radius: 3px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: #94A3B8;
+    }
+  }
+}
+
+.dark {
+  .el-popover {
+    // ... existing dark popover styles ...
+
+    .max-h-60 {
+      &::-webkit-scrollbar-track {
+        background: #1E293B;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: #334155;
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        background: #475569;
+      }
+    }
+  }
+}
+
+// Quill Editor Dark Mode Styling
+.dark {
+  .ql-toolbar.ql-snow {
+    border-color: #3d4d60 !important;
+    background-color: #1d2a39 !important;
+
+    .ql-picker {
+      color: #E2E8F0 !important;
+    }
+
+    .ql-stroke {
+      stroke: #E2E8F0 !important;
+    }
+
+    .ql-fill {
+      fill: #E2E8F0 !important;
+    }
+
+    .ql-picker-options {
+      background-color: #1A222C !important;
+      border-color: #3d4d60 !important;
+
+      .ql-picker-item {
+        color: #E2E8F0 !important;
+
+        &:hover {
+          color: #3C50E0 !important;
+        }
+      }
+    }
+
+    button:hover {
+      .ql-stroke {
+        stroke: #3C50E0 !important;
+      }
+
+      .ql-fill {
+        fill: #3C50E0 !important;
+      }
+    }
+
+    .ql-active {
+      .ql-stroke {
+        stroke: #3C50E0 !important;
+      }
+
+      .ql-fill {
+        fill: #3C50E0 !important;
+      }
+    }
+  }
+
+  .ql-container.ql-snow {
+    border-color: #3d4d60 !important;
+  }
+
+  .ql-editor {
+    background-color: #1d2a39 !important;
+    color: #E2E8F0 !important;
+
+    &.ql-blank::before {
+      color: #64748B !important;
+    }
+
+    p, h1, h2, h3, h4, h5, h6, ol, ul {
+      color: #E2E8F0 !important;
+    }
+
+    a {
+      color: #3C50E0 !important;
+    }
+
+    code, pre {
+      background-color: #1E293B !important;
+      color: #E2E8F0 !important;
+      border-color: #3d4d60 !important;
+    }
+
+    blockquote {
+      border-left-color: #3d4d60 !important;
+      color: #94A3B8 !important;
+    }
+  }
+
+  // Tooltip styling
+  .ql-tooltip {
+    background-color: #1A222C !important;
+    border-color: #3d4d60 !important;
+    color: #E2E8F0 !important;
+
+    input[type="text"] {
+      background-color: #1d2a39 !important;
+      border-color: #3d4d60 !important;
+      color: #E2E8F0 !important;
+
+      &:focus {
+        border-color: #3C50E0 !important;
+      }
+    }
+
+    a.ql-action,
+    a.ql-remove {
+      color: #3C50E0 !important;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  // Snow theme specific
+  .ql-snow {
+    .ql-picker-label {
+      color: #E2E8F0 !important;
+
+      &:hover {
+        color: #3C50E0 !important;
+      }
+    }
+
+    &.ql-toolbar button:hover,
+    &.ql-toolbar button:focus,
+    &.ql-toolbar button.ql-active,
+    &.ql-toolbar .ql-picker-label:hover,
+    &.ql-toolbar .ql-picker-label.ql-active,
+    &.ql-toolbar .ql-picker-item:hover,
+    &.ql-toolbar .ql-picker-item.ql-selected {
+      color: #3C50E0 !important;
+    }
+  }
+}
+
+// Menu item styling (both light and dark mode)
+.menu-item {
+  &.menu-item-active {
+    background-color: rgb(70 95 255 / 0.12) !important;
+    
+    .menu-item-icon-active {
+      color: rgb(117 146 255 / var(--tw-text-opacity, 1)) !important;
+    }
+
+    .menu-item-text {
+      color: rgb(117 146 255 / var(--tw-text-opacity, 1)) !important;
+    }
+  }
+
+  &:hover {
+    background-color: rgb(70 95 255 / 0.12) !important;
+
+    .menu-item-icon-inactive {
+      color: rgb(117 146 255 / var(--tw-text-opacity, 1)) !important;
+    }
+
+    .menu-item-text {
+      color: rgb(117 146 255 / var(--tw-text-opacity, 1)) !important;
+    }
+  }
+}
+
+// Add these new styles for menu dropdown items
+.menu-dropdown-item {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  color: #64748B;
+  font-size: 0.875rem;
+  transition: all 0.3s ease;
+  border-radius: 0.5rem;
+
+  &:hover {
+    background-color: rgb(70 95 255 / 0.12) !important;
+    color: rgb(117 146 255 / var(--tw-text-opacity, 1)) !important;
+  }
+
+  &.menu-dropdown-item-active {
+    background-color: rgb(70 95 255 / 0.12) !important;
+    color: rgb(117 146 255 / var(--tw-text-opacity, 1)) !important;
+  }
+}
+
+// Dark mode adjustments for dropdown items
+.dark {
+  .menu-dropdown-item {
+    color: #94A3B8;
+
+    &:hover {
+      background-color: rgb(70 95 255 / 0.12) !important;
+      color: rgb(117 146 255 / var(--tw-text-opacity, 1)) !important;
+    }
+
+    &.menu-dropdown-item-active {
+      background-color: rgb(70 95 255 / 0.12) !important;
+      color: rgb(117 146 255 / var(--tw-text-opacity, 1)) !important;
+    }
+  }
+}
+
+// Add/modify el-select styles
+.el-select {
+  .el-select__wrapper {
+    outline: none !important;
+    &.is-hovering, &.is-focused {
+      outline: none !important;
+      input {
+        outline: none !important;
+        box-shadow: none !important;
+      }
+      .el-select__selection {
+        outline: none !important;
+        box-shadow: none !important;
+      }
+    }
+  }
+}
+
+// Dark mode adjustments
+.dark {
+  .el-select {
+    .el-select__wrapper {
+      background-color: #1d2a39 !important;
+      box-shadow: 0 0 0 1px #3d4d60 inset !important;
+
+      &.is-hovering, &.is-focused {
+        box-shadow: 0 0 0 1px #3C50E0 inset !important;
+      }
+    }
+  }
+}
+

@@ -1,0 +1,29 @@
+{
+    "extends": "@vue/tsconfig/tsconfig.dom.json",
+    "include": [
+        "env.d.ts",
+        "resources/**/*",
+        "resources/**/**/*",
+        "resources/**/**/**/*",
+        "resources/*.vue",
+        "vite.config.*",
+        "vitest.config.*",
+        "cypress.config.*",
+        "nightwatch.conf.*",
+        "playwright.config.*"
+    ],
+    "exclude": ["resources/**/__tests__/*"],
+    "compilerOptions": {
+        "composite": true,
+        "allowJs": true,
+        "noImplicitAny": false,
+        "noEmit": true,
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["./resources/js/*"]
+        },
+        "module": "ESNext",
+        "moduleResolution": "Bundler",
+        "types": ["node"]
+    }
+}
