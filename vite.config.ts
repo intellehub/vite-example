@@ -40,8 +40,7 @@ export default defineConfig({
     },
     resolve: {
         alias: {
-            '@': fileURLToPath(new URL('./resources/js', import.meta.url)),
-            'vue-i18n': 'vue-i18n/dist/vue-i18n.cjs.js'
+            '@': fileURLToPath(new URL('./resources/js', import.meta.url))
         }
     },
     build: {
@@ -60,8 +59,7 @@ export default defineConfig({
                     'element-plus': ['element-plus'],
                     'data-utils': ['axios', 'lodash'],
                     'charts': ['vue3-apexcharts'],
-                    'editor': ['@vueup/vue-quill'],
-                    'realtime': ['pusher-js', 'laravel-echo']
+                    'editor': ['@vueup/vue-quill']
                 }
             },
             plugins: [
